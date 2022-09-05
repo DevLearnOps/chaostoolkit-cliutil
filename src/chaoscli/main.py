@@ -164,7 +164,10 @@ def run(config_file: str):
             os.path.join(tempdirname, config_file_name)
         )
 
-        subprocess.run(cmd.render(), check=True, cwd=tempdirname)
+        try:
+            subprocess.run(cmd.render(), check=True, cwd=tempdirname)
+        except subprocess.CalledProcessError:
+            pass
 
         s3.upload_file(
             os.path.join(tempdirname, "chaostoolkit.log"),
