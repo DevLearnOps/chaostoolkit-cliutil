@@ -8,6 +8,7 @@ boto3 = "*"
 botocore = "*"
 logzero = "*"
 pyyaml = "*"
+jinja2 = "*"
 
 [dev-packages]
 pipenv-setup = "*"
