@@ -1,0 +1,3 @@
+[tool.black]
+# How many characters per line to allow.
+line-length = 79
