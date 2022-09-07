@@ -1,5 +1,9 @@
 .PHONY: test fmt
 
+install:
+	pipenv install --dev
+	pipenv run pip install --editable .
+
 test:
 	pipenv run pytest tests/
 
