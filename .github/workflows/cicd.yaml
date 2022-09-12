@@ -1,0 +1,28 @@
+name: Continuos Integration
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  Build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: ls -laR src/
+
+      - name: Set build variables
+        id: vars
+        run: |
+          echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+          echo ::set-output name=cur_version::$(git describe --abbrev=0 --tags)
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install --upgrade pipenv
+          make install
+      - name: Run tests
+        run: make test
